@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+<?php if ($this->question_info['question_id'] != FALSE) { ?>
+<meta name="mobile-agent" content="format=html5;url=<?php echo base_url(); ?>/question/<?php echo $this->question_info['question_id']; ?>"/> 
+	<?php } elseif ($this->article_info['id'] != FALSE) { ?>
+<meta name="mobile-agent" content="format=html5;url=<?php echo base_url(); ?>/article/<?php echo $this->article_info['id']; ?>"/>
+<?php } elseif ($this->topic_info['url_token'] != FALSE) { ?>
+<meta name="mobile-agent" content="format=html5;url=<?php echo base_url(); ?>/topic/<?php echo $this->topic_info['url_token']; ?>"/>
+<?php } ?>
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="X-UA-Compatible" content="<?php echo X_UA_COMPATIBLE; ?>" />
+<meta name="renderer" content="webkit" />
+<title><?php echo $this->page_title; ?></title>
+<meta name="keywords" content="<?php echo $this->_meta_keywords; ?>" />
+<meta name="description" content="<?php echo preg_replace("/(\r\n|\n|\r|\t)/i", '', $this->_meta_description); ?>"  />
+<?php if ($this->article_info['id'] != FALSE) { ?>
+<meta property="og:type" content="news"/>
+<?php } ?>
+<meta property="og:description" content="<?php echo preg_replace("/(\r\n|\n|\r|\t)/i", '', $this->_meta_description); ?>"/>
+<?php if ($this->question_info['question_id'] != FALSE) { ?>
+<meta property="og:url" content="<?php echo base_url(); ?>/question/<?php echo $this->question_info['question_id']; ?>"/> 
+<meta property="og:release_date" content="<?php echo date_friendly($this->question_info['add_time'], 604800, 'Y-m-d H:i:s'); ?>"/>  
+	<?php } elseif ($this->article_info['id'] != FALSE) { ?>
+<meta property="og:url" content="<?php echo base_url(); ?>/article/<?php echo $this->article_info['id']; ?>"/>
+<meta property="og:release_date" content="<?php echo date_friendly($this->article_info['add_time'], 604800, 'Y-m-d H:i:s'); ?>"/>  
+<?php } ?>
+<base href="<?php echo base_url();?>/<?php if (get_setting('url_rewrite_enable') != 'Y') { ?><?php echo G_INDEX_SCRIPT; ?><?php } ?>" /><!--[if IE]></base><![endif]-->
+<!-- og:type -->
+
+<link href="<?php echo G_STATIC_URL; ?>/css/<?php echo $this->template_name; ?>/img/favicon.ico?v=<?php echo G_VERSION_BUILD; ?>" rel="shortcut icon" type="image/x-icon" />
+
+<link rel="stylesheet" type="text/css" href="<?php echo G_STATIC_URL; ?>/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo G_STATIC_URL; ?>/css/icon.css" />
+
+<?php if (is_array($this->_import_css_files)) { ?>
+<?php foreach ($this->_import_css_files AS $import_css) { ?>
+<link href="<?php echo $import_css; ?>?v=<?php echo G_VERSION_BUILD; ?>" rel="stylesheet" type="text/css" />
+<?php } ?>
+<?php } ?>
+
+<?php if ($this->template_name != 'default') { ?>
+<link href="<?php echo G_STATIC_URL; ?>/css/<?php echo $this->template_name; ?>/<?php echo $this->template_name; ?>.css" rel="stylesheet" type="text/css" />
+<?php } ?>
+
+<?php $post_hash_var_name = strtoupper(md5(TIMESTAMP . $this->userinfo['salt'])); ?>
+<script type="text/javascript">
+	var _<?php echo $post_hash_var_name; ?>="<?php echo new_post_hash(); ?>";
+	var G_POST_HASH=_<?php echo $post_hash_var_name; ?>;
+	var G_INDEX_SCRIPT = "<?php if (get_setting('url_rewrite_enable') != 'Y') echo G_INDEX_SCRIPT; ?>";
+	var G_SITE_NAME = "<?php echo addcslashes(get_setting('site_name'), '\"'); ?>";
+	var G_BASE_URL = "<?php echo base_url(); if (get_setting('url_rewrite_enable') != 'Y') { ?>/<?php echo rtrim(G_INDEX_SCRIPT, '/'); } ?>";
+	var G_STATIC_URL = "<?php echo G_STATIC_URL; ?>";
+	var G_UPLOAD_URL = "<?php echo get_setting('upload_url'); ?>";
+	var G_USER_ID = "<?php echo $this->user_id; ?>";
+	var G_USER_NAME = "<?php echo addcslashes($this->user_info['user_name'], '\"'); ?>";
+	var G_UPLOAD_ENABLE = "<?php echo get_setting('upload_enable'); ?>";
+	var G_UNREAD_NOTIFICATION = 0;
+	var G_NOTIFICATION_INTERVAL = <?php echo intval(get_setting('unread_flush_interval')) * 1000; ?>;
+	var G_CAN_CREATE_TOPIC = "<?php echo $this->user_info['permission']['create_topic']; ?>";
+	var G_ADVANCED_EDITOR_ENABLE = "<?php echo get_setting('advanced_editor_enable'); ?>";
+	var FILE_TYPES = "<?php echo strtolower(get_setting('allowed_upload_types')); ?>";
+
+
+	<?php if (human_valid('question_valid_hour')) { ?>
+	var G_QUICK_PUBLISH_HUMAN_VALID = true;
+	<?php } ?>
+</script>
+<?php if (is_array($this->_import_js_files)) { ?>
+<?php foreach ($this->_import_js_files AS $import_js) { ?>
+<script src="<?php echo $import_js; ?>?v=<?php echo G_VERSION_BUILD; ?>" type="text/javascript"></script>
+<?php } ?>
+<?php } ?>
+<script type="text/javascript" src="<?php echo G_STATIC_URL; ?>/css/chaofen/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="<?php echo G_STATIC_URL; ?>/js/compatibility.js"></script>
+<!--[if lte IE 8]>
+	<script type="text/javascript" src="<?php echo G_STATIC_URL; ?>/js/respond.js"></script>
+<![endif]-->
+<script>
+$(function() {
+	//图片延时加载
+	$(".shibox img").lazyload({
+	placeholder : G_STATIC_URL+"/common/grey.gif",
+	effect : "fadeIn"
+	});
+	$(".aw-article-list img").lazyload({
+	placeholder : G_STATIC_URL+"/common/grey.gif",
+	effect : "fadeIn"
+	});
+	$(".markitup-box img").lazyload({
+	placeholder : G_STATIC_URL+"/common/grey.gif",
+	effect : "fadeIn"
+	});
+});
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?0284dbc2fb164ab9b56b4e1bfff2062d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+<noscript unselectable="on" id="noscript">
+    <div class="aw-404 aw-404-wrap container">
+        <img src="<?php echo G_STATIC_URL; ?>/common/no-js.jpg">
+        <p>你的浏览器禁用了JavaScript, 请开启后刷新浏览器获得更好的体验!</p>
+    </div>
+</noscript>

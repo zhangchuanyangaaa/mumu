@@ -1,0 +1,108 @@
+<?php TPL::output('global/tou.tpl.htm'); ?>
+<script type="text/javascript">
+<!--
+	$(function(){ 
+		$(".Nav .nn").mouseover(function(){
+			$(this).children(".N_BLOCK").show();
+		}).mouseout(function(){
+			$(this).children(".N_BLOCK").hide();
+		});
+		
+		$(".fa-z .faa").mouseover(function(){
+			$(this).children(".fa-block").show();
+		}).mouseout(function(){
+			$(this).children(".fa-block").hide();
+		});
+		
+		$(".fa-z .us").mouseover(function(){
+			$(this).children(".us-block").show();
+		}).mouseout(function(){
+			$(this).children(".us-block").hide();
+		});
+		
+	});
+//-->
+</script>
+
+<div class="cn-wrap">
+            <div class="cn-ct w1120"> 
+                <div class="cn-logo">
+                    <h1 class="logo"><img src="static/css/images/Logo.png" alt="<?php echo $this->page_title; ?>"></h1> 
+                </div>
+                <div class="cn-fr">
+                    <form class="cn-banlist" action="search/" id="global_search_form" method="post">
+					<!--<input type="hidden" name="s" value="2927848866848051903">-->
+					<input class="nav-search-input" type="text" placeholder="<?php _e('一键解决情感问题'); ?>" autocomplete="off" name="q" id="aw-search-query" />					 <span title="<?php _e('搜索'); ?>" id="global_search_btns" onClick="$('#global_search_form').submit();"><i class="icon-search"></i></span>
+                    </form>
+                </div>
+            </div>
+    </div>
+
+<!-- 问答列表开始 -->
+
+	<div class="content w1120 pt20 pb30">
+    	<div class="w790 fl pb30"> 
+        	<div class="tab-wen">
+           		<div class="tab-wentitle pt15">
+                	<h2>暮●问答</h2>
+                    <ul class="tab-wen-title"> 
+					    <li<?php if ((!$_GET['sort_type'] OR $_GET['sort_type'] == 'new') AND !$_GET['is_recommend']) { ?> class="wen-cur"<?php } ?>><a href="<?php if ($this->feature_info) { ?>feature_id-<?php echo $this->feature_info['id']; ?>__<?php } ?><?php if ($this->category_info['id']) { ?>category-<?php echo $this->category_info['id']; ?><?php } ?>"><?php _e('最新'); ?></a></li>
+						<li<?php if ($_GET['is_recommend']) { ?> class="wen-cur"<?php } ?>><a href="<?php if ($this->feature_info) { ?>feature_id-<?php echo $this->feature_info['id']; ?>__<?php } ?>category-<?php echo $this->category_info['id']; ?>__is_recommend-1"><?php _e('推荐'); ?></a></li>
+						<li<?php if ($_GET['sort_type'] == 'hot') { ?> class="wen-cur"<?php } ?>><a href="<?php if ($this->feature_info) { ?>feature_id-<?php echo $this->feature_info['id']; ?>__<?php } ?>category-<?php echo $this->category_info['id']; ?>__sort_type-hot__day-7" id="sort_control_hot"><?php _e('热门'); ?></a></li>
+						<li<?php if ($_GET['sort_type'] == 'unresponsive') { ?> class="wen-cur"<?php } ?>><a href="<?php if ($this->feature_info) { ?>feature_id-<?php echo $this->feature_info['id']; ?>__<?php } ?>category-<?php echo $this->category_info['id']; ?>__sort_type-unresponsive"><?php _e('等待回复'); ?></a></li>
+						
+                    </ul>
+                    <div class="m"><a href="publish/" target="_blank"> 发出问题</a></div>
+                </div>
+                <?php if ($_GET['sort_type'] == 'hot') { ?>
+					<!-- hot time tabs -->
+					<div class="aw-tabs">
+						<ul>
+							<li<?php if ($_GET['day'] == 30) { ?> class="wen-cur"<?php } ?>><a href="<?php if ($this->feature_info) { ?>feature_id-<?php echo $this->feature_info['id']; ?>__<?php } ?>sort_type-hot__<?php if ($this->category_info['id']) { ?>__category-<?php echo $this->category_info['id']; ?><?php } ?>__day-30" day="30"><?php _e('30天'); ?></a></li>
+						  	<li<?php if ($_GET['day'] == 7) { ?> class="wen-cur"<?php } ?>><a href="<?php if ($this->feature_info) { ?>feature_id-<?php echo $this->feature_info['id']; ?>__<?php } ?>sort_type-hot__<?php if ($this->category_info['id']) { ?>__category-<?php echo $this->category_info['id']; ?><?php } ?>__day-7" day="7"><?php _e('7天'); ?></a></li>
+						  	<li<?php if ($_GET['day'] == 1) { ?> class="wen-cur"<?php } ?>><a href="<?php if ($this->feature_info) { ?>feature_id-<?php echo $this->feature_info['id']; ?>__<?php } ?>sort_type-hot__<?php if ($this->category_info['id']) { ?>__category-<?php echo $this->category_info['id']; ?><?php } ?>__day-1" day="1"><?php _e('当天'); ?></a></li>
+						</ul>
+					</div>
+					<!-- end hot time tabs -->
+					<?php } ?>
+				
+                <div class="wenlists">
+				<!-- 单条记录 开始 -->
+                	<?php echo $this->posts_list_bit; ?>
+				
+				<!-- 单条记录结束 -->
+				
+                
+                </div>
+				<!--分页开始 -->
+                <div class="mod-footer">
+							<?php echo $this->pagination; ?>
+						</div>
+				<!--分页结束-->
+                <!-- wenlists end-->
+                
+                
+            </div>
+            <!--暮问答-end-->
+
+        	
+        </div>
+        <!--left-content-->      
+        
+    	<div class="w290 fr">
+			<!-- hot article -->
+        	<?php TPL::output('block/sidebar_feature.tpl.htm'); ?>        	
+            <!-- hot topic -->
+            <?php TPL::output('block/sidebar_hot_topics.tpl.htm'); ?>
+            <!-- hot user -->
+            <?php TPL::output('block/sidebar_hot_users.tpl.htm'); ?>
+        	<!--活跃用户-->
+            
+        </div>
+        <!--right-content-->
+        
+    </div>
+    <!--content-end-->
+
+	
+<?php TPL::output('global/footer_index.tpl.htm'); ?>

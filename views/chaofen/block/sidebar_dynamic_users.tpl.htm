@@ -1,0 +1,26 @@
+<div class="hotauthor mb20">
+    <div class="index-r-title"><h2>活跃用户</h2><a href="people/" target="_blank" class="more">更多&gt;</a></div>
+    <?php if (is_array($this->sidebar_dynamic_users)): ?>
+    <ul class="alist">
+        <?php foreach ($this->sidebar_dynamic_users AS $key => $val): ?>
+        <li>
+            <div class="zu"><a href="people/<?php echo $val['user_name']; ?>" target="_blank"><img src="<?php echo get_avatar_url($val['uid'], 'mid'); ?>"></a></div>
+            <div class="zu-l">
+                <p>
+                <a href="people/<?php echo $val['user_name']; ?>" target="_blank" class="name" data-id="<?php echo $val['uid']; ?>"><?php echo $val['user_name']; ?></a>
+                <a href="people/<?php echo $val['user_name']; ?>" target="_blank" class="guan">+关注</a>
+                </p>
+                <p><span class="wei"><i>威望：</i><a href="people/<?php echo $val['user_name']; ?>" target="_blank"><?php echo $val['fans_count'] ?></a></span><span class="zan"><i>赞同：</i><a href="people/<?php echo $val['user_name']; ?>" target="_blank"> <?php echo $val['agree_count'] ?></a></span></p>
+                <?php if ($val['reputation_topics']): ?>                          
+                <p class="shan"><i>擅长话题：</i>
+                <?php foreach ($val['reputation_topics'] as $k => $v): ?>
+                    <a target="_blank" href="topic/<?php echo $v['url_token']; ?>" data-id="<?php echo $v['topic_id']; ?>"><?php echo $v['topic_title']; ?></a>
+                <?php endforeach ?>
+                <?php endif ?>
+                </p>
+            </div>
+        </li>
+        <?php endforeach ?>
+    </ul>
+    <?php endif ?>
+</div> 

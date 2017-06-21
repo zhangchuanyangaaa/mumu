@@ -1,0 +1,119 @@
+<?php TPL::output('admin/global/header.tpl.htm'); ?>
+<?php TPL::output('admin/global/nav_menu.tpl.htm'); ?>
+
+<div class="aw-content-wrap">
+    <div class="mod">
+        <div class="mod-head">
+            <h3>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#list" data-toggle="tab"><?php _e('问答统计'); ?></a></li>
+                    <li><a href="admin/wenda/setting/"><?php _e('设置'); ?></a></li>
+                    <li><a href="#search" data-toggle="tab"><?php _e('搜索'); ?></a></li>
+                </ul>
+            </h3>
+        </div>
+        <div class="mod-body tab-content">
+            <div class="tab-pane active" id="list">
+                <?php if ($_GET['action'] == 'search') { ?>
+                <div class="alert alert-info"><?php _e('找到 %s 条符合条件的内容', intval($this->total_rows)); ?></div>
+                <?php } ?>
+
+                <div class="table-responsive">
+                <?php if ($this->items) { ?>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th><?php _e('用户名'); ?></th>
+                                <th><?php _e('用户组'); ?></th>
+                                <th><?php _e('上月'); ?></th>
+                                <th><?php _e('本月'); ?></th>
+                                <?php if ($_GET['action'] == 'search'): ?>
+                                    <th>
+                                        <?php if (isset($_GET['start_date']) && !empty($_GET['start_date'])): ?>
+                                            <?php echo $_GET['start_date'] ?>
+                                        <?php else: ?>
+                                            -
+                                        <?php endif ?>
+                                        ~
+                                        <?php if (isset($_GET['end_date']) && !empty($_GET['end_date'])): ?>
+                                            <?php echo $_GET['end_date'] ?>
+                                        <?php else: ?>
+                                            -
+                                        <?php endif ?>
+                                    </th>
+                                <?php endif ?>
+
+
+                                <th><?php _e('所有'); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->items AS $key => $val) { ?>
+                            <tr>
+                                <td><?php echo $val['user_name']; ?></td>
+                                <td><a href="admin/wenda/index/group_id-<?php echo $val['group_id'] ?>"><?php echo $val['group_name']; ?></a></td>
+                                <td><?php echo $val['count']['prev']; ?> | <?php echo $val['views']['prev']; ?></td>
+                                <td><?php echo $val['count']['curr']; ?> | <?php echo $val['views']['curr']; ?></td>
+                                <?php if ($_GET['action'] == 'search'): ?>
+                                <td><?php echo $val['count']['time']; ?> | <?php echo $val['views']['time']; ?></td>
+                                <?php endif ?>
+                                <td><?php echo $val['count']['all']; ?> | <?php echo $val['views']['all']; ?></td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                <?php } ?>
+                </div>
+                <div class="mod-table-foot">
+                    <?php echo $this->pagination; ?>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="search">
+                <form method="post" action="admin/wenda/index/" onsubmit="return false;" id="search_form" class="form-horizontal" role="form">
+
+                    <input name="action" type="hidden" value="search" />
+
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-3 control-label"><?php _e('用户组'); ?>:</label>     
+                        <div class="col-sm-6 col-xs-9">
+                            <select class="form-control" name="group_id">
+                            <option value="0"><?php _e('所有会员组');?></option>
+                            <?php foreach ($this->groups AS $group) { ?>
+                            <option value="<?php echo $group['group_id']; ?>"<?php if ($group['group_id'] == (int) $this->wenda['group_id']) { ?> selected="selected"<?php } ?>><?php echo $group['group_name']; ?></option>
+                            <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-3 control-label"><?php _e('发起时间范围'); ?>:</label>
+                        <div class="col-sm-6 col-xs-9">
+                            <div class="row">
+                                <div class="col-xs-11  col-sm-5 mod-double">
+                                    <input type="text" class="form-control mod-data" value="<?php echo $_GET['start_date']; ?>" name="start_date" />
+                                    <i class="icon icon-date"></i>
+                                </div>
+                                <span class="mod-symbol col-xs-1 col-sm-1">
+                                -
+                                </span>
+                                <div class="col-xs-11 col-sm-5">
+                                    <input type="text" class="form-control mod-data" value="<?php echo $_GET['end_date']; ?>" name="end_date" />
+                                    <i class="icon icon-date"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-5 col-xs-8">
+                            <button type="button" onclick="AWS.ajax_post($('#search_form'));" class="btn btn-primary">搜索</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php TPL::output('admin/global/footer.tpl.htm'); ?>

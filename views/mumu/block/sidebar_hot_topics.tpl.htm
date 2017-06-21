@@ -1,0 +1,20 @@
+
+<div class="hothua mb20">
+            	<div class="index-r-title"><h2>热门话题</h2><a href="topic/channel-hot" target="_blank" class="more"><?php _e('更多'); ?>></a></div>
+                <ul class="hlist">
+				<?php if (is_array($this->sidebar_hot_topics)) { ?>
+				<?php foreach($this->sidebar_hot_topics AS $key => $val) {?>
+                	<li>
+                    	 <div class="zu"><a href="topic/<?php echo $val['topic_title'];?>" target="_blank"><img src="<?php echo get_topic_pic_url('mid', $val['topic_pic']); ?>" alt="<?php echo $val['topic_title'];?>"/></a></div>
+                         <div class="zu-l">
+                         	<span><a href="topic/<?php echo $val['topic_title'];?>" target="_blank"><?php echo $val['topic_title'];?></a></span>
+                            <p><a href="topic/<?php echo $val['topic_title'];?>" target="_blank"><?php _e('%s', $val['discuss_count']); ?></a>个问题，<a href="topic/<?php echo $val['topic_title'];?>" target="_blank"><?php _e('%s', $val['focus_count']); ?></a>个参与</p>
+                         </div>
+                    </li>
+                    
+					<?php } ?>
+					<?php } ?>
+                </ul>
+            </div>
+        	<!--热门话题-->
+

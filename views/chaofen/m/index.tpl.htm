@@ -1,0 +1,140 @@
+<?php TPL::output('m/tou.tpl.htm'); ?>
+
+	<?php if ($this->content_nav_menu) { ?>
+	
+	<section class="tip mb10" style="margin-top:10px;">
+		<!--<p class="title"><i class="icon icon-agree fl"></i>推荐话题<a class="fr" href="m/topic/"><i class="icon icon-more"></i></a></p>-->  
+		<div class="swiper-container">
+        <ul class="swiper-wrapper">
+		<?php foreach ($this->content_nav_menu as $key => $val) { ?>
+			<?php if ($val['title']) { ?>
+			<li class="swiper-slide"><a <?php if (($val['type'] == 'category' AND $_GET['category'] AND ($val['type_id'] == $this->category_info['id'])) OR ($val['type'] == 'feature' AND $this->feature_info['id'] == $val['type_id'])) { ?> class="active"<?php } ?> href="<?php echo $val['link']; ?>" target="_blank"><?php echo $val['title']; ?></a></li>
+			<?php } ?>
+			<?php } ?>
+        </ul >  
+    </div>
+		<script>
+		var swiper = new Swiper('.tip .swiper-container', {
+			pagination: '.tip .swiper-pagination',
+			slidesPerView: 'auto', 
+			paginationClickable: true,
+			spaceBetween: 10 
+			});
+		</script> 
+	</section>
+	<!--推荐话题end-->
+	<?php } ?>
+
+	<!-- 内容 -->	
+	
+	<section class="plr10">
+	 <ul class="tplist" id="load_explore_list"> 
+	 <?php if ($this->posts_list) { ?>
+		<?php foreach($this->posts_list as $key => $val) { ?>
+	 	 <li class="boxys">
+	 	 	<div class="info">
+	 	 		<p class="fl"><?php if ($val['anonymous'] == 0) { ?><a href="people/<?php echo $val['user_info']['url_token']; ?>"><img src="<?php echo get_avatar_url($val['answer_info']['user_info']['uid'], 'max'); ?>" alt="<?php echo $val['user_info']['url_token']; ?>" class="per"><?php echo $val['user_info']['user_name']; ?></a><?php } else { ?><a><img src="<?php echo G_STATIC_URL; ?>/common/avatar-max-img.png" alt="<?php _e('匿名用户'); ?>" class="per" title="<?php _e('匿名用户'); ?>" /><?php _e('匿名用户'); ?></a><?php } ?></p>
+				<?php if ($val['topics']) { ?><?php foreach ($val['topics'] AS $k => $topic): ?><?php if($k > 0) continue; ?><a href="m/topic/<?php echo $topic['topic_title'];?>" class="name fr"><?php echo $topic['topic_title'];?></a><?php endforeach ?><?php } ?></div>
+				<?php if ($val['question_id']) { ?>
+	 	 	<h2><a href="m/question/<?php echo $val['question_id']; ?>" class="tpname"><?php echo $val['question_content']; ?></a></h2> 
+			<?php } else { ?>
+			<h2><a href="m/article/<?php echo $val['id']; ?>" class="tpname"><?php echo $val['title']; ?></a></h2>
+			<?php } ?> 
+			<?php
+				$content = ($val['question_id']) ? $val['question_detail'] : $val['message'];
+				$content = nl2br(trim(FORMAT::parse_attachs(FORMAT::parse_bbcode($content))));
+				$attachs = (array) get_img_by_string($content);
+				$attachs = array_unique(array_merge_multi($attachs, (array) $val['attachs']));
+			?>	
+			<?php if (empty($attachs)){	?>
+	 	 	 <div class="words"><?php echo cjk_substr(html2text($content), 0, 80, 'utf-8', '...'); ?> <?php if (cjk_strlen($content) > 80) { ?> <?php if ($val['question_id']) { ?><a class="read" href="m/question/<?php echo $val['question_id']; ?>">阅读全文</a><?php } else { ?><a class="read" href="m/article/<?php echo $val['id']; ?>">阅读全文</a><?php } } ?></div><?php } ?>
+			<?php if ($attachs): ?>	
+	 	 	 <div class="show-img">
+			 <?php foreach ($attachs as $k => $v): ?>
+			 <?php if($k > 0) continue; ?>
+					<?php if (!is_array($v)): ?>
+						<?php
+						$attach = array();
+						$attach['attachment'] = $attach['thumb'] = $v;
+						$attach['file_name'] = basename($v);
+						?>
+					<?php else: ?>
+						<?php $attach = $v; ?>
+					<?php endif ?>
+			 <?php if ($val['question_id']) { ?><a href="m/question/<?php echo $val['question_id']; ?>"><img src="<?php echo $attach['attachment'] ?>"  alt="<?php echo $attach['file_name'] ?>"></a><?php } else { ?><a href="m/article/<?php echo $val['id']; ?>"><img src="<?php echo $attach['attachment'] ?>"  alt="<?php echo $attach['file_name'] ?>"></a><?php } ?>
+			 <?php endforeach ?>
+			 </div>
+			<?php endif ?>
+	 	 	 <div class="cz"><?php if ($val['question_id']) { ?>
+			 <span class="zan fl"><i class="icon iconfont heart">回复</i><b class="count"><?php echo $val['answer_count']; ?></b><i class="line"></i></span><span class="ll fl">关注<i class="count"><?php echo $val['focus_count']; ?></i><i class="line"></i></span><span class="pl fl"><i class="txt">浏览</i><i class="count"><?php echo $val['view_count']; ?></i> </span><span class="fr"><i class="txt"><?php echo date_friendly($val['add_time'], 604800, 'Y-m-d'); ?></i></span><?php } else { ?>
+			 <span class="zan fl"><i class="icon iconfont heart">评论</i><b class="count"><?php echo $val['comments']; ?></b><i class="line"></i></span><span class="pl fl"><i class="txt">浏览</i><i class="count"><?php echo $val['views']; ?></i> </span><span class="fr"><i class="txt"><?php echo date_friendly($val['add_time'], 604800, 'Y-m-d'); ?></i></span><?php } ?></div> 
+	 	 </li>
+		 <?php } ?>
+	<?php } ?>
+	 </ul> 
+	 
+	 <div class="mod-footer">
+				<a id="load_explore" class="aw-load-more" auto-load="false"><i class="icon icon-loading icon-spin"></i> <span><?php _e('加载更多..'); ?></span></a>
+			</div>
+	 </section>
+	
+	<!--用户推荐-->
+	<?php if (is_array($this->sidebar_hot_users)) { ?>
+	 <section class="peo mb10">
+		 <p class="title">你可能感兴趣的人</p>  
+		<div class="swiper-container">	
+        <ul class="swiper-wrapper">
+		<?php foreach($this->sidebar_hot_users AS $key => $val) {?>	
+       		<li class="swiper-slide">
+				<a class="peoli" href="m/people/<?php echo $val['url_token']; ?>">
+					<img src="<?php echo get_avatar_url($val['uid'], 'mid'); ?>" alt="<?php echo $val['user_name']; ?>" class="per">
+					<span class="name"><a href="m/people/<?php echo $val['url_token']; ?>"><?php echo $val['user_name']; ?></a></span>
+					<p class="st"><?php _e('威望 %s',$val['fans_count']); ?><br /><?php _e('赞同 %s',$val['agree_count']); ?></p>
+					<p class="guan"><a href="m/people/<?php echo $val['url_token']; ?>">关注</a></p>
+				</a>  
+       		</li> 
+       	<?php } ?>
+        </ul >  
+    </div>
+		<script>
+		var swiper = new Swiper('.peo .swiper-container', {
+			pagination: '.peo .swiper-pagination',
+			slidesPerView: 'auto', 
+			paginationClickable: true,
+			spaceBetween: 10 
+			});
+		</script> 
+	</section> 		
+    <?php } ?>
+
+
+
+	<!-- end 内容 -->
+
+<script type="text/javascript">
+	$(document).ready(function ()
+	{
+		<?php if ($_GET['category']) { ?>
+		AWS.load_list_view(G_BASE_URL + '/explore/ajax/list/sort_type-new__category' + '-' + <?php echo $_GET['category']; ?> + '__day-0__is_recommend-1', $('#load_explore'), $('#load_explore_list'), 2);
+		<?php } else { ?>
+		AWS.load_list_view(G_BASE_URL + '/explore/ajax/list/sort_type-new__day-0__is_recommend-1', $('#load_explore'), $('#load_explore_list'), 2);
+		<?php } ?>
+
+		if ($('.top-category').length)
+		{
+			var length = 0;
+
+			$.each($('.top-category li'), function (i, e)
+			{
+				length += $(this).innerWidth();
+			});
+
+			$('.top-category ul').css('width', length + 10)
+
+			var myScroll = new IScroll('.top-category', { eventPassthrough: true, scrollX: true, scrollY: false, preventDefault: false });
+		}
+	});
+
+</script>
+
+<?php TPL::output('m/footer.tpl.htm'); ?>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>暮暮最新内容-暮暮MUM.CC</title>
+<meta name="keywords" content="暮暮" />
+<meta name="generator" content="暮暮Baidu SiteMap Generator" />
+<style type="text/css">
+body { font-family: Verdana; FONT-SIZE: 12px; MARGIN: 0; color: #000000; background: #ffffff; }
+img { border:0; }
+li { margin-top: 8px; }
+.page { padding: 4px; border-top: 1px #EEEEEE solid }
+.author { background-color:#EEEEFF; padding: 6px; border-top: 1px #ddddee solid }
+#nav,
+#content,
+#footer { padding: 8px; border: 1px solid #EEEEEE; clear: both; width: 95%; margin: auto; margin-top: 10px; }
+</style>
+</head>
+<body vlink="#333333" link="#333333">
+<h2 style="text-align: center; margin-top: 20px">暮暮's SiteMap </h2>
+<center>
+</center>
+<div id="nav"><a href="http://www.mum.cc/"><strong>暮暮</strong></a> &raquo; <a href="http://www.mum.cc/sitenews.html">最新新闻</a></div>
+
+<div id="content">
+	<h3>最新内容</h3>
+	<ul>
+	<?php foreach($this->list as $key => $val){ ?>
+<li><?php if ($val['question_id']) { ?><a href="<?php echo get_js_url('/question/' . $val['question_id']); ?>" target="_blank"><?php echo $val['question_content']; ?></a><?php } else { ?><a href="<?php echo get_js_url('/article/' . $val['id']); ?>" target="_blank"><?php echo $val['title'] ?></a><?php } ?> - <?php echo date('Y-m-d H:i:s', $val['add_time']); ?></li>
+<?php } ?>
+</ul>
+
+</div>
+<div id="footer">网站首页: <strong><a href="http://www.mum.cc/">暮暮 - 倾诉你的情感、分享你我的故事、追寻心灵的答案</a></strong></div>
+<br />
+<center>
+	<div style="text-algin: center; font-size: 11px"><strong>Baidu-SiteMap</strong> &nbsp;
+		Latest Update: <?php echo date('Y-m-d H:i:s',time())?><br />
+		<br />
+	</div>
+</center>
+<div style="display:none"><script type="text/javascript" src="http://www.mum.cc/plugins/makehtml.php"></script></div>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?0284dbc2fb164ab9b56b4e1bfff2062d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</body>
+</html>
+
+
+

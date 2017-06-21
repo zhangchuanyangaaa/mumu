@@ -1,0 +1,112 @@
+<?php TPL::output('global/header.tpl.htm'); ?>
+<link rel="stylesheet" href="<?php echo G_STATIC_URL; ?>/css/<?php echo $this->template_name; ?>/rewen.css">
+<div class="aw-container-wrap">
+    <div class="coral_logo"> </div>
+    <div id="wrapper">
+        <div id="container" data-page="1">
+            <?php if ($this->article_list): ?>
+            <?php foreach ($this->article_list as $key => $val): ?>
+            <div class="grid aw-item">
+                <?php
+                $attach = current($val['attachs']);
+                $content =  nl2br(trim(FORMAT::parse_attachs(FORMAT::parse_bbcode($val['message']))));
+                if (empty($attach)) {
+                    $thumb = current((array) get_img_by_string($content));
+                    $attach['thumb'] = $attach['attachment'] = $thumb;
+                }
+                ?>
+                <?php if ($attach): ?>
+                <div class="imgholder"><a target="_blank" href="article/<?php echo $val['id']; ?>"><img class="lazy" src="<?php echo $attach['thumb'] ?>" data-original="<?php echo $attach['attachment'] ?>"  /></a></div>
+                <?php endif ?>      
+                <div class="listbox">
+                    <strong>
+                    <?php if ($val['views'] > 500): ?>
+                        <span class="spanb_d">热</span>
+                    <?php endif ?>
+                    <?php if ($val['comments'] >　500): ?>
+                        <span class="spanb_b">精</span>
+                    <?php endif ?>
+                    <?php if ($val['is_recommend']): ?>
+                        <span class="spanb_c">荐</span>
+                    <?php endif ?>
+                    <?php if (time() - $val['add_time'] <= 86400): ?>
+                        <span class="spanb_a">新</span>
+                    <?php endif ?>
+                    <?php
+                    $last_comment = end($val['comment_list']);
+                    ?>
+                    <a target="_blank" href="article/<?php echo $val['id']; ?>"><?php echo $val['title'] ?></a></strong>
+                    <p style="border-bottom: 1px solid #e6e6e6;"><?php if ($last_comment): ?><a href="#" class="aw-user-name" data-id="<?php echo $last_comment['uid'] ?>"><?php echo $last_comment['user_info']['user_name'] ?></a>
+                            <span class="text-color-999">回复了讨论 • <?php endif ?><?php echo $val['votes'] ?> 人赞 • <?php echo $val['comments'] ?> 个回复 • <?php echo (int) $val['views'] ?> 次浏览 • <?php echo date_friendly($val['add_time']) ?></span></p>
+                    <?php if ($val['comment_list']): ?>
+                    <div class="aw-question-content" id="aw-question-content_3378">                 
+                        <div class="inner clearfix">
+                            <div class="pull-right hidden-xs contribute">
+                                <?php foreach ($val['comment_list'] as $k => $v): ?>
+                                <?php if($k > 1) continue;?>
+                                <a class="aw-user-name" data-id="<?php echo $v['uid'] ?>" href="#" rel="nofollow"><img src="<?php echo get_avatar_url($v['uid']) ?>" alt=""></a>
+                                <?php endforeach ?>
+                            </div>
+                            <p class="question-text" style="color: #666; font-size:13px;">
+                            <?php
+                            echo cjk_substr(html2text($content), 0, 80, 'utf-8', '...');
+                            ?>
+                            </p>
+                        </div>                        
+                        <ul class="targetpost">
+                            <?php foreach ($val['comment_list'] as $k => $v): ?>
+                            <?php if($k > 2) continue;?>
+                            <li class="post">
+                                <div class="post-content"><span class="headImg popClick"><a href="#" rel="nofollow"><img src="<?php echo get_avatar_url($v['uid']) ?>"></a></span><span class="publisher popClick"><a href="#" rel="nofollow"><?php echo $v['user_info']['user_name'] ?></a></span>：<?php echo cjk_substr($v['message'], 0, 15, 'utf-8', '...') ?><span class="uptime"><?php echo date_friendly($v['add_time']) ?></span></div>
+                            </li>
+                            <?php endforeach ?>
+                        </ul>                        
+                    </div>
+                    <?php endif ?>
+                </div>  
+            </div>
+            <?php endforeach ?>
+            <?php endif ?>
+        </div>
+    </div>
+    <div id="nole" style="display:none;margin:0 auto;line-height: 34px;margin: 20px 20px 0" align="center"></div>
+</div>
+<style>
+.aw-more{background:#fafafa; width:1240px; text-align:center; height:35px; border-radius:4px; border:1px solid #f2f2f2;line-height:35px; margin:30px auto; }
+.aw-more a{ color:#777}
+</style>
+<script src="<?php echo G_STATIC_URL; ?>/css/<?php echo $this->template_name; ?>/jquery.lazyload.min.js" type="text/javascript"></script>
+<script src="<?php echo G_STATIC_URL; ?>/css/<?php echo $this->template_name; ?>/blocksit.min.js"></script>
+<script src="<?php echo G_STATIC_URL; ?>/css/<?php echo $this->template_name; ?>/foxpb.js"></script>
+
+<script type="text/javascript">
+    var ANSWER_EDIT_TIME = <?php echo get_setting('answer_edit_time'); ?>;
+    $(document).ready(function () {
+        if ($('.aw-article-vote.disabled').length)
+        {
+            $('.aw-article-vote.disabled a').attr('onclick', '');
+        }
+
+        AWS.at_user_lists('#wmd-input');
+
+        AWS.Init.init_article_comment_box($('.aw-article-comment'));
+    });
+
+$(function() {
+    //图片延时加载
+    $(".shibox img").lazyload({
+        placeholder : G_STATIC_URL+"/common/grey.gif",
+        effect : "fadeIn"
+    });
+        $(".aw-article-list img").lazyload({
+        placeholder : G_STATIC_URL+"/common/grey.gif",
+        effect : "fadeIn"
+    });
+    $(".markitup-box img").lazyload({
+        placeholder : G_STATIC_URL+"/common/grey.gif",
+        effect : "fadeIn"
+    });
+});
+</script>
+
+<?php TPL::output('global/footer.tpl.htm'); ?>

@@ -1,0 +1,56 @@
+@charset "utf-8";
+/* CSS Document */
+html {color:#000;background:#fff;-webkit-text-size-adjust:none; }
+*{margin:0;padding:0;}
+
+*:focus {outline: none} 
+
+/*头部分享*/ 
+.col-sm-12{ margin:0 auto; overflow:hidden;}
+.tag-bar{ float:left;}
+.share_to_left{ float:left;}
+.aw-topic-bar .topic-tag {float: left;margin: 0 10px 10px 0; float:left;}
+.topic-tag .text {display: inline-block;height:22px;line-height: 16px;padding: 2px 5px;background-color: #666;font-size: 12px;color: #fff;border-radius: 4px;}
+.topic-tag a {float: left;}
+.detail{ height:24px; line-height:24px; position:relative; width:500px; float:right;}
+.detail em{display: inline-block;height: 24px;line-height:24px;margin-right: 10px;}
+.detail .share_to{display: inline-block;}
+.detail .bdsharebuttonbox{zoom:1;overflow:hidden;position:absolute;right:0;}
+.detail .bdsharebuttonbox strong{ font-size:12px;font-weight:100;float:left;}
+.detail .bdsharebuttonbox a,.page_area .bdsharebuttonbox a{background:url(../images/ss.jpg) no-repeat;margin:0px; margin-right:1px;width:74px;height:24px;padding:0px;float:left;}
+.detail .bdsharebuttonbox a.bds_tsina{background-position:0 0;}
+.page_area .bdsharebuttonbox a.bds_tsina{background-position:0 0;}
+.detail .bdsharebuttonbox a.bds_weixin{background-position: -74px 0; width:74px}
+.detail .bdsharebuttonbox a.bds_qzone{background-position: -148px 0; width:90px;} 
+.detail .bdsharebuttonbox a.bds_more{background-position: -238px 0; width:26px}
+span.page-tool-c {border-left: 1px solid #ccc; float:left;}
+.page-tool-i {padding: 0 14px 0 0;margin: 0;border: none 0;height:24px;}
+#commentCount1{height:24px;line-height:24px;padding-left: 15px;margin: 0 18px 0 0;color: #ff8500;font-size:20px;font-family: "Arial black";}
+.detail span{float:left;position: relative;line-height:24px;color: #333;font-size:14px;margin-left:10px}
+.detail  span.page-tool-share a { width:26px;background:background:url(../images/ss.jpg) no-repeat;background-position:-264px 0;}
+/*底部评论提示框*/
+.tie-input-bar.z-write-mode {position: relative;} 
+.xieyi{ height:30px; line-height:30px; color:#888;}
+.tie-input-bar.z-write-mode > form {height: 114px;}
+.tie-input-bar.z-write-mode > form textarea {height: 114px;resize: none;border: none;width: 100%;box-sizing: border-box;font-size: 14px;line-height: 24px;padding: 4px 14px;}
+.tie-input-bar.z-write-mode .submit-row {background-color: #f6f6f6;height: 44px;overflow: hidden;}
+.tie-input-bar.z-write-mode .submit-row > form {position: relative;}
+.tie-input-bar.z-write-mode .submit-row form, .tie-input-bar.z-write-mode .submit-row .links-area, .tie-input-bar.z-write-mode .submit-row .photo-area {
+float: left;}
+.tie-input-bar.z-write-mode .submit-row form input.account-input {margin: 7px 5px 7px 10px;border-radius: 3px;}
+.tie-input-bar.z-write-mode .submit-row form input {height: 30px;width: 105px;margin: 7px 0;border: none;padding-left: 15px;}
+input, select, textarea {font-size: 100%;}
+.tie-input-bar.z-write-mode .submit-row .links-area {margin-left: 15px;} 
+.tie-input-bar.z-write-mode .submit-row .links-area a {color: #008cd2;text-decoration: none;line-height: 44px;} 
+.tie-input-bar.z-write-mode .submit-row .submit-btn {font-size: 14px;font-family: "Microsoft YaHei";color: #fff;background-color: #1d87e4;width: 130px;height: 44px;line-height: 44px;float: right;text-align: center;cursor: pointer;}
+.tie-input-bar.z-write-mode .i-check-tip {position: absolute;z-index: 9;width: 104px;height: 34px;background-position: 0 -30px;color: #fff;line-height: 28px;text-align: center;}
+.tie-reminder {color: #888888;line-height: 1em;padding-top: 10px;margin-bottom: 30px;} 
+.tie-area > .tie-input-bar {-webkit-transition: height 0.3s;-o-transition: height 0.3s;transition: height 0.3s;}
+.tie-area > .tie-input-bar {height: 158px;}
+.tie-input-bar {border: solid 1px #ccc;border-radius: 5px;overflow: hidden;} 
+input, button, textarea, select, optgroup, option {font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;} 
+.tie-input-bar.z-write-mode .submit-row .photo-area {float: left;}
+ .tie-area .tie-input-bar.z-write-mode .submit-row .photo-area .dflt-avatar {margin-right: 10px;}
+.tie-input-bar.z-write-mode .submit-row .photo-area .dflt-avatar {width: 35px;height: 35px;border-radius: 50%;margin: 5px 15px;float: left;}
+.tie-input-bar.z-write-mode .submit-row .photo-area .dflt-avatar {background:url(../images/6630810479980030059.jpg) no-repeat;}
+.tie-input-bar.z-write-mode .submit-row .photo-area .nickname {font-weight: bold;line-height: 44px;}

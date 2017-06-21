@@ -1,0 +1,43 @@
+<?php if ($this->posts_list) { ?>
+		<?php foreach($this->posts_list as $key => $val) { ?>
+	 	 <li class="boxys">
+	 	 	<div class="info">
+	 	 		<p class="fl"><?php if ($val['anonymous'] == 0) { ?><a href="people/<?php echo $val['user_info']['url_token']; ?>"><img src="<?php echo get_avatar_url($val['answer_info']['user_info']['uid'], 'max'); ?>" alt="<?php echo $val['user_info']['url_token']; ?>" class="per"><?php echo $val['user_info']['user_name']; ?></a><?php } else { ?><a><img src="<?php echo G_STATIC_URL; ?>/common/avatar-max-img.png" alt="<?php _e('匿名用户'); ?>" class="per" title="<?php _e('匿名用户'); ?>" /><?php _e('匿名用户'); ?></a><?php } ?></p>
+				<?php if ($val['topics']) { ?><?php foreach ($val['topics'] AS $k => $topic): ?><?php if($k > 0) continue; ?><a href="m/topic/<?php echo $topic['topic_title'];?>" class="name fr"><?php echo $topic['topic_title'];?></a><?php endforeach ?><?php } ?></div>
+				<?php if ($val['question_id']) { ?>
+	 	 	<h2><a href="m/question/<?php echo $val['question_id']; ?>" class="tpname"><?php echo $val['question_content']; ?></a></h2> 
+			<?php } else { ?>
+			<h2><a href="m/article/<?php echo $val['id']; ?>" class="tpname"><?php echo $val['title']; ?></a></h2>
+			<?php } ?> 
+			<?php
+				$content = ($val['question_id']) ? $val['question_detail'] : $val['message'];
+				$content = nl2br(trim(FORMAT::parse_attachs(FORMAT::parse_bbcode($content))));
+				$attachs = (array) get_img_by_string($content);
+				$attachs = array_unique(array_merge_multi($attachs, (array) $val['attachs']));
+			?>	
+			<?php if (empty($attachs)){	?>
+	 	 	 <div class="words"><?php echo cjk_substr(html2text($content), 0, 80, 'utf-8', '...'); ?> <?php if (cjk_strlen($content) > 80) { ?> <?php if ($val['question_id']) { ?><a class="read" href="m/question/<?php echo $val['question_id']; ?>">阅读全文</a><?php } else { ?><a class="read" href="m/article/<?php echo $val['id']; ?>">阅读全文</a><?php } } ?></div><?php } ?>
+			<?php if ($attachs): ?>	
+	 	 	 <div class="show-img">
+			 <?php foreach ($attachs as $k => $v): ?>
+			 <?php if($k > 0) continue; ?>
+					<?php if (!is_array($v)): ?>
+						<?php
+						$attach = array();
+						$attach['attachment'] = $attach['thumb'] = $v;
+						$attach['file_name'] = basename($v);
+						?>
+					<?php else: ?>
+						<?php $attach = $v; ?>
+					<?php endif ?>
+			 <?php if ($val['question_id']) { ?><a href="m/question/<?php echo $val['question_id']; ?>"><img src="<?php echo $attach['attachment'] ?>"  alt="<?php echo $attach['file_name'] ?>"></a><?php } else { ?><a href="m/article/<?php echo $val['id']; ?>"><img src="<?php echo $attach['attachment'] ?>"  alt="<?php echo $attach['file_name'] ?>"></a><?php } ?>
+			 <?php endforeach ?>
+			 </div>
+			<?php endif ?>
+
+	 	 	 <div class="cz"><?php if ($val['question_id']) { ?>
+			 <span class="zan fl"><i class="icon iconfont heart">回复</i><b class="count"><?php echo $val['answer_count']; ?></b><i class="line"></i></span><span class="ll fl">关注<i class="count"><?php echo $val['focus_count']; ?></i><i class="line"></i></span><span class="pl fl"><i class="txt">浏览</i><i class="count"><?php echo $val['view_count']; ?></i> </span><span class="fr"><i class="txt"><?php echo date_friendly($val['add_time'], 604800, 'Y-m-d'); ?></i></span><?php } else { ?>
+			 <span class="zan fl"><i class="icon iconfont heart">评论</i><b class="count"><?php echo $val['comments']; ?></b><i class="line"></i></span><span class="pl fl"><i class="txt">浏览</i><i class="count"><?php echo $val['views']; ?></i> </span><span class="fr"><i class="txt"><?php echo date_friendly($val['add_time'], 604800, 'Y-m-d'); ?></i></span><?php } ?></div> 
+	 	 </li>
+		 <?php } ?>
+	<?php } ?>

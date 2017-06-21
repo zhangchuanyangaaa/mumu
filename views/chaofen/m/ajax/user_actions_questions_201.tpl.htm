@@ -1,0 +1,10 @@
+<?php if (is_array($this->list)) { ?>
+<?php foreach ($this->list AS $key => $val) { ?>
+<li class="boxys">
+	 	 	<h2><a href="<?php echo $val['link']; ?>" class="tpname"><?php echo $val['title']; ?></a></h2> 
+	 	 	 <div class="words"><?php echo cjk_substr(FORMAT::ubbfirebox($val['answer_info']['answer_content']), 0, 80, 'UTF-8', '...'); ?> <?php if (cjk_strlen(FORMAT::ubbfirebox($val['answer_info']['answer_content'])) > 80) { ?> <a class="read" href="<?php echo $val['link']; ?>">阅读全文</a><?php } ?></div>
+			 <div class="cz">
+			 <span class="zan fl"><?php echo $val['answer_info']['agree_count']; ?> <?php _e('个赞同'); ?></span><span class="fr"><?php echo date_friendly($val['add_time'], 604800, 'Y-m-d'); ?></span></div> 
+	 	 </li>
+<?php } ?>
+<?php } ?>

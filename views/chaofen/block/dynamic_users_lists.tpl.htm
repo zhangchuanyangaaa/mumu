@@ -1,0 +1,35 @@
+		<div class="ad-all clearfix hidden-xs hidden-sm">
+            <div id="qiandao">
+                <div class="pull-right" style="color:#999;">
+	                <b>站内统计</b>
+	                <span style="padding:0 0 0 10px;">会员：<?php echo (int) $this->dynamic_users_count['users_counts'] ?> / 激活：<?php echo (int) $this->dynamic_users_count['users_active_counts'] ?></span>
+	                <span style="padding:0 0 0 10px;">讨论：<?php echo (int) $this->dynamic_users_count['question_counts'] ?></span>
+	                <span style="padding:0 0 0 10px;">文章：<?php echo (int) $this->dynamic_users_count['article_counts'] ?></span>
+                </div>
+                <h2 class="hidden-xs"><i class="icon icon-users"></i> 活跃榜</h2>
+                <div class="qiandaobox hidden-xs hidden-sm">
+                	<?php foreach ($this->dynamic_users_lists as $key => $value): ?>
+                	<?php if ($key == 0): ?>
+                	<dt class="pull-left">
+                		<a target="_blank" href="people/<?php echo $value['user_name']; ?>" class="aw-user-name" title="<?php echo $value['user_name'] ?>" data-id="<?php echo $value['uid'] ?>" rel="nofollow"><img alt="<?php echo $value['user_name'] ?>" src="<?php echo get_avatar_url($value['uid'],'max') ?>"></a>
+                	</dt>
+                	<?php else: ?>
+                	<dd class="pull-left xboxs">
+                		<a target="_blank" href="people/<?php echo $value['user_name']; ?>" class="aw-user-name" title="<?php echo $value['user_name'] ?>" data-id="<?php echo $value['uid'] ?>" rel="nofollow"><img alt="<?php echo $value['user_name'] ?>" src="<?php echo get_avatar_url($value['uid'],'max') ?>" style="display: inline-block; width: 50px; margin-top: 0px; margin-left: 0px;"></a>
+                    </dd>                	                			
+                	<?php endif ?>
+                	<?php endforeach ?>						
+             	</div>
+        	</div>
+    	</div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.xboxs').hover(function() {
+        $(this).find(".aw-user-name img").css("background","red");
+        $(this).find('img').animate({width:55, marginTop:-5, marginLeft:-2}, 500);
+    }, function() {
+        $(this).find(".aw-user-name img").css("background","");
+        $(this).find('img').animate({width:55, marginTop:0, marginLeft:0},300);
+    })
+})
+</script>   

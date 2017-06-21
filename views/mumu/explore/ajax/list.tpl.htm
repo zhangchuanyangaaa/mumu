@@ -1,0 +1,54 @@
+<style type="text/css">.aw-upload-img-list{text-align:center; max-height:150px; max-width:200px; overflow:hidden; float:right; margin-left:15px;}.cont {float:left;}.img-polaroid{width:200px;}
+</style>
+<?php if ($this->posts_list) { ?>
+<?php foreach($this->posts_list as $key => $val) { ?>
+<?php if ($val['question_id']) { ?><div class="wen-list img_none"  data-topic-id="<?php foreach ($val['topics'] AS $k => $v) { ?><?php echo $v['topic_id']; ?>,<?php } ?>"> <?php } else { ?><div class="wen-list img_none"  data-topic-id="<?php foreach ($val['topics'] AS $k => $v) { ?><?php echo $v['topic_id']; ?>,<?php } ?>"><?php } ?>
+                	<div class="wen-c">
+                    	<div class="wen-p">
+						<!-- title -->
+						<?php if ($val['question_id']) { ?>
+						<h2><a href="question/<?php echo $val['question_id']; ?>"><?php echo $val['question_content']; ?></a></h2>
+						<?php } else { ?>
+						<h2><a href="article/<?php echo $val['id']; ?>"><?php echo $val['title']; ?></a></h2>
+						<?php } ?>
+						<!-- description -->
+						<?php if (!$val['question_id']) { ?>
+                       		<p class="cont">
+							
+			<?php echo FORMAT::parse_attachs(nl2br(FORMAT::parse_bbcode(cjk_substr($val['massage'], 0, 130, 'UTF-8', '...')))); ?> <?php if (cjk_strlen($val['message']) > 130) { ?> <a class="more" href="article/<?php echo $val['id']; ?>">查看全部</a><?php } ?></p>
+			
+			
+						<?php } ?> 
+                        </div>
+                        <div class="wen-img"><a href="article/<?php echo $val['id']; ?>" target="_blank" title="<?php echo $val['title']; ?>"><img src="static/mumu/images/wen-1.jpg" alt="<?php echo $val['title']; ?>"> </a></div> 
+                    </div> 
+                    <div class="wen-f">  
+                    	<div class="wen-user"> 
+                        	<p class="autor-hover"><?php if ($val['anonymous'] == 0) { ?><a data-id="<?php echo $val['uid']; ?>" href="people/<?php echo $val['user_info']['url_token']; ?>" target="_blank" class="author-face"><img class="con-pic" src="<?php echo get_avatar_url($val['user_info']['uid'], 'max'); ?>" alt=""><span class="author-name"><?php echo $val['user_info']['user_name']; ?></span></a><?php } else { ?><a href="javascript:;" class="author-face"><img class="con-pic" src="<?php echo G_STATIC_URL; ?>/common/avatar-max-img.png" alt="<?php _e('匿名用户'); ?>"><span class="author-name"><?php _e('匿名用户'); ?></span></a><?php } ?></p>  
+							
+                            <p class="author"><span class="author-from">来自&nbsp;&nbsp;<?php if ($_GET['category'] != $val['category_id'] AND $val['category_info']['title']) { ?><a href="explore/category-<?php echo $val['category_info']['url_token']; ?>" target="_blank"><?php echo $val['category_info']['title']; ?></a></span></p><?php } ?>
+                            <p class="fen">
+							<?php if ($val['question_id']) { ?>
+                            	<span> <?php echo date_friendly($val['update_time']); ?></span>
+                                <span><i class="inbg"></i><em class="xnum xc32"><?php _e('%s', $val['focus_count']); ?></em></span>
+                                <span><i class="saybg"></i><em class="xnum xc32"><?php _e('%s', $val['answer_count']); ?></em></span>
+                                <span><i class="addbg"></i><em class="xnum xc32"><?php _e('%s', $val['view_count']); ?></em></span>
+							<?php } else { ?>
+								<span> <?php echo date_friendly($val['add_time']); ?></span>
+                                <span><i class="inbg"></i><em class="xnum xc32"><?php _e('%s', $val['views']); ?></em></span>
+                                <span><i class="saybg"></i><em class="xnum xc32"><?php _e('%s', $val['comments']); ?></em></span>
+                                <!--<span><i class="addbg"></i><em class="xnum xc32"><?php _e('%s', $val['view_count']); ?></em></span>-->
+							<?php } ?>
+                           </p>  
+                          <!--效果html开始-->
+							
+                          <div class="share"><div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div></div>
+
+                        </div>
+                    </div>                
+                </div>
+
+<?php } ?>
+<?php } ?>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>

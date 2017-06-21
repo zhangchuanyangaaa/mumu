@@ -1,0 +1,47 @@
+            <?php if ($this->article_list): ?>
+            <?php foreach ($this->article_list as $key => $val): ?>
+            <div class="grid aw-item">
+                <?php $attach = current($val['attachs']) ?>
+                <?php if ($attach): ?>
+                <div class="imgholder"><img class="lazy" src="<?php echo $attach['thumb'] ?>" data-original="<?php echo $attach['attachment'] ?>"  /></div>
+                <?php endif ?>      
+                <div class="listbox">
+                    <strong>
+                    <?php if (time() - $val['add_time'] <= 86400): ?>
+                        <span class="spanb_a">新</span>
+                    <?php elseif($val['views'] > 5): ?>
+                        <span class="spanb_d">热</span>
+                    <?php else: ?>
+                        <span class="spanb_b">精</span>
+                    <?php endif ?>
+                    <?php
+                    $last_comment = end($val['comment_list']);
+                    ?>
+                    <a href="article/<?php echo $val['id']; ?>"><?php echo $val['title'] ?></a></strong>
+                    <p style="border-bottom: 1px solid #e6e6e6;"><?php if ($last_comment): ?><a href="#" class="aw-user-name" data-id="<?php echo $last_comment['uid'] ?>"><?php echo $last_comment['user_info']['user_name'] ?></a>
+                            <span class="text-color-999">回复了讨论 • <?php endif ?><?php echo $val['votes'] ?> 人赞 • <?php echo $val['comments'] ?> 个回复 • <?php echo (int) $val['views'] ?> 次浏览 • <?php echo date_friendly($val['add_time']) ?></span></p>
+                    <?php if ($val['comment_list']): ?>
+                    <div class="aw-question-content" id="aw-question-content_3378">                 
+                        <div class="inner clearfix">
+                            <div class="pull-right hidden-xs contribute">
+                                <?php foreach ($val['comment_list'] as $k => $v): ?>
+                                <?php if($k > 1) continue;?>
+                                <a class="aw-user-name" data-id="<?php echo $v['uid'] ?>" href="#" rel="nofollow"><img src="<?php echo get_avatar_url($v['uid']) ?>" alt=""></a>
+                                <?php endforeach ?>
+                            </div>
+                            <p class="question-text" style="color: #666; font-size:13px;"><?php echo cjk_substr(FORMAT::parse_attachs(strip_tags(nl2br(FORMAT::parse_bbcode($val['message'])))), 0, 20, '...'); ?></p>
+                        </div>                        
+                        <ul class="targetpost">
+                            <?php foreach ($val['comment_list'] as $k => $v): ?>
+                            <?php if($k > 2) continue;?>
+                            <li class="post">
+                                <div class="post-content"><span class="headImg popClick"><a href="#" rel="nofollow"><img src="<?php echo get_avatar_url($v['uid']) ?>"></a></span><span class="publisher popClick"><a href="#" rel="nofollow"><?php echo $v['user_info']['user_name'] ?></a></span>：<?php echo $v['message'] ?><span class="uptime"><?php echo date_friendly($val['add_time']) ?></span></div>
+                            </li>
+                            <?php endforeach ?>
+                        </ul>                        
+                    </div>
+                    <?php endif ?>
+                </div>  
+            </div>
+            <?php endforeach ?>
+            <?php endif ?>

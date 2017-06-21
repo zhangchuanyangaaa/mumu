@@ -1,0 +1,24 @@
+<form action="link/ajax/apply/" method="post" id="quick_publish" class="form-horizontal">
+	<div class="alert alert-danger hide error_message"><em></em></div>
+	<div class="form-group">
+		<label class="col-sm-3 control-label">网站名称：</label>
+		<div class="col-sm-9">
+			<input type="text" name="site_name" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-3 control-label">网站地址：</label>
+		<div class="col-sm-9">
+			<input type="text" name="site_url" class="form-control">
+		<p class="aw-text-color-999">网址格式，如：http://www.mum.cc</p>
+		</div>
+	</div>
+	<div class="form-group">
+		<p class="aw-text-color-999" style="margin-left:20px;"><b>温馨提示：</b>提交申请前请先做好本站链接，我们将在2-3个工作日内进行审核，网址不符要求的一律不予审核。</p>
+	</div>
+</form>
+<div class="modal-footer">
+	<span class="pull-right">
+		<button class="btn btn-large btn-success" onclick="AWS.ajax_post($('#quick_publish'), AWS.ajax_processer, 'error_message');">提交申请</button>
+	</span>
+</div>

@@ -1,0 +1,16 @@
+
+
+				<?php if (sizeof($this->feature_list) > 0) { ?>
+				<div class="hotwen mb20">
+            	<div class="index-r-title"><h2>热门文章</h2><a href="article/" target="_blank" class="more">更多></a></div>
+                <ul class="wlist">
+				<?php foreach($this->feature_list as $key => $val){ ?>
+                	<li>
+                    	<h2><a href="feature/<?php echo $val['url_token']; ?>" target="_blank"><?php echo $val['category_info']['title']; ?></a></h2>
+                        <p><a href="feature/<?php echo $val['url_token']; ?>" target="_blank"><?php echo $val['title']; ?></a></p>
+                    </li>
+				<?php } ?>
+                    
+                </ul>
+            </div>
+			<?php } ?>

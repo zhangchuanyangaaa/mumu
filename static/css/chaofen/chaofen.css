@@ -1,0 +1,108 @@
+@charset "UTF-8";
+body{margin: 0;height: 100%;font-size:14px; line-height:160%;color: #666;background:url('img/bg.gif') repeat;}
+/* 顶部 */
+.aw-top-menu-wrap{position:relative;z-index:1001;width:100%;min-height:42px;background-color:#7a46ad; margin-bottom:10px}
+.aw-container-wrap{margin-top: 30px;}
+.aw-logo, .aw-search-box, .aw-top-nav{position:relative;float: left;}
+.aw-publish-btn, .aw-user-nav, .aw-top-notification{position:relative;float:right;margin:4px 2px;}
+.aw-logo{width:90px;height:40px;margin:7px 0 0 0;}
+.aw-logo a{display:block;width: 90px;height: 40px;background:url('img/logo.jpg') no-repeat;}
+/*导航*/
+.container {width: 1140px !important; padding: 0 !important; margin: 0 auto; }
+.aw-top-menu-wrap .container{height:42px;}
+/*logo*/
+.Top_logo{width: 80px;height: 42px;float:left; margin-right:20px;background:url('img/logo.png') no-repeat;}
+.Top-logo a {display: block;width: 120px;height: 42px;  cursor:pointer}
+
+
+.aw-publish-btn{width:80px;}
+.aw-publish-btn a{display:block;width:80px;height: 32px;line-height: 32px;font-size: 14px;text-align: center;border-radius: 3px;}
+.aw-publish-btn i{vertical-align:-2px;margin-right: 10px;font-size: 16px;}
+.aw-publish-btn:hover #header_publish{border-radius: 4px 4px 0 0;}
+.aw-publish-btn:hover .dropdown-list{display: block;}
+.aw-publish-btn .dropdown-list{position: absolute;display: none;}
+.aw-publish-btn .dropdown-list a{background-color: #58687a;border-radius: 0;color: #fff;}
+.aw-publish-btn .dropdown-list a:hover{background-color: #505d6c;}
+.aw-publish-btn .dropdown-list ul li:last-child a{border-radius: 0 0 4px 4px;}
+.aw-top-nav{margin:0;border: none;}
+.aw-top-nav .icon-bar{background-color: #fff;font-size: 0;}
+.aw-top-nav > nav > ul > li > a{padding:11px 16px;color: #fff;}
+.aw-top-nav > nav > ul > li > a.active{background: #da46aa;font-weight: bold;}
+.aw-top-nav > nav > ul > li > a:hover, .aw-top-nav > nav > ul > li > a:focus{background: #da46aa;}
+.aw-top-nav > nav > ul > li > a i{position:relative;top:2px;font-size: 16px;}
+.aw-top-nav > nav > ul > li > a i.icon-home{top: 1px;}
+.aw-top-nav > nav > ul > li:hover .dropdown-list{display: block;}
+.aw-top-nav > nav > ul > li .dropdown-list{display:none;position: absolute;right:0;width:80px;}
+.aw-top-nav > nav > ul > li .dropdown-list ul li a{display:block;height: 42px;line-height: 42px;padding:0 10px;background: #4dabff;text-align: center;color: #fff;}
+.aw-top-nav > nav > ul > li .dropdown-list ul li a:hover{background: #339dff;}
+.aw-top-nav > nav > ul > li .dropdown-list ul li i{margin-right: 3px;vertical-align: -1px;font-size: 16px;}
+.aw-top-nav > nav > ul > li .dropdown-list ul li:last-child a{border-radius: 0 0 4px 4px;}
+.aw-top-nav .badge{position: absolute;top: 4px;right: 2px;}
+.aw-top-nav ul li:hover .aw-dropdown{display: block;}
+.aw-top-nav .aw-dropdown{display:none;top:100%;min-width:300px;border-top: none;border-radius: 0 0 4px 4px;}
+.aw-top-nav .aw-dropdown .more{font-size: 12px;}
+.aw-top-nav .aw-dropdown .close{display: none;}
+.aw-top-nav .aw-dropdown ul li{padding:5px 10px;border-top:1px solid #f5f5f5;}
+.aw-top-nav .aw-dropdown ul li:first-child{border-top: none;}
+.aw-top-nav .aw-dropdown ul li:hover{background: #f5faff;}
+.aw-top-nav .aw-dropdown ul li:hover .read{display: inline-block;}
+.aw-top-nav .aw-dropdown ul li p{margin: 0;padding:0;}
+.aw-top-nav .aw-dropdown ul li .message{display:inline-block;width: 260px;font-size: 12px;}
+.aw-top-nav .aw-dropdown ul li .read{display: none;}
+.aw-top-nav .aw-dropdown ul li:last-child{border-radius: 0 0 4px 4px;}
+.aw-top-nav .aw-dropdown .mod-footer a{display: block;height:40px;text-align: center;background-color: #fafafa;color: #999999;font-size: 12px;line-height:40px;border-radius: 0 0 4px 4px;border-top: 1px solid #f5f5f5;} 
+.aw-user-nav:hover .dropdown-list{display: block;}
+.aw-user-nav img{width: 32px;height: 32px;}
+.aw-user-nav .login{margin-right: 10px;}
+.aw-user-nav .aw-user-nav-dropdown{display:block;height: 42px;}
+.aw-user-nav .aw-user-nav-dropdown .badge{position: absolute;top: -8px;right: -8px;}
+.aw-user-nav .dropdown-list{top:100%;width:122px;border-top:none;border-radius: 0 0 4px 4px;}
+.aw-user-nav .dropdown-list ul li a i{vertical-align:-2px;margin-right: 5px;font-size: 16px;}
+
+/* 侧边栏 */
+.index-r-title {padding: 5px 0; font-weight:bold;margin-bottom: 15px;}
+.index-r-title h2 {float: left;}
+.index-r-title .more {float: right; font-size:12px; font-weight:normal;}
+.border_d9d9d9{ border-bottom:1px solid #d9d9d9; margin:20px 0; clear:both;}
+/* 热门话题 */
+.hlist,.alist { overflow:hidden; width:300px}
+.hlist a{ color:#58687A;}
+.hlist li{overflow:hidden; font-size:12px; margin-bottom:10px;}
+.hlist .zu,.alist .zu{ float:left; height:auto; padding-right:15px; overflow:hidden;}
+.hlist .zu img,.alist .zu img{border-radius:10%}
+.hlist .zu-l,.alist .zu-l{ float:left; overflow:hidden; width:235px}
+.hlist .zu-l span{ height:24px; line-height:24px; overflow:hidden; display:block;}
+.hlist .zu-l span a{ color:#fff; float:left;height:22px; line-height:22px;display:block; margin-right:5px;border-radius:4px; background:#7a46ad; text-align:center; padding: 0 5px;}
+.hlist .zu-l p{ height:24px; line-height:24px; overflow:hidden;margin:0; padding:0; }
+
+/* footer */
+.aw-footer-wrap { clear:both; border:1px solid #d8d8d8; zoom:1;}
+
+
+.spanb_a{clear:both;color:#FFF!important;background-color:#5bbf5a;border-radius:4px;padding:1px 3px}
+.spanb_b{clear:both;color:#FFF!important;background-color:#F51;border-radius:4px;padding:1px 3px}
+.spanb_c{clear:both;color:#FFF!important;background-color:#9D0;border-radius:4px;padding:1px 3px}
+.spanb_d{clear:both;color:#FFF!important;background-color:#ffca3f;border-radius:4px;padding:1px 3px}
+.spanb_e{clear:both;color:#FFF!important;background-color:#59b0ff;border-radius:4px;padding:1px 3px}
+
+
+/*修正首页用户头像及认证标*/
+.aw-common-list .aw-item .aw-user-imgs .aw-user-name-o img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin: 5px;
+    vertical-align: middle;
+}
+.aw-common-list .aw-item .icon-v, .aw-feed-list .aw-item .icon-v {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 18px;
+    height: 18px;
+    color: #fff;
+    text-align: center;
+    line-height: 18px;
+    font-size: 14px;
+    border-radius: 4px;
+}

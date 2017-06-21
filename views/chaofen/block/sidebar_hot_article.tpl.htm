@@ -1,0 +1,12 @@
+<div class="aw-mod">
+    <div class="index-r-title"><h2>猜你喜欢</h2><a href="article/" target="_blank" class="more">更多&gt;</a></div>
+    <div class="mod-body">
+        <?php if (is_array($this->sidebar_hot_article)): ?>
+        <ul>
+            <?php foreach ($this->sidebar_hot_article AS $key => $val): ?>               
+            <li><a target="_blank" href="article/<?php echo $val['id']; ?>"><?php echo $val['title'] ?></a> </li>
+            <?php endforeach ?>
+        </ul>
+        <?php endif ?>
+     </div>
+</div>

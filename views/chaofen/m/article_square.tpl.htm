@@ -1,0 +1,48 @@
+<?php TPL::output('m/header.tpl.htm'); ?>
+
+<?php if ($this->content_nav_menu) { ?>
+	
+	<section class="tip mb10" style="margin-top:10px;">
+		<!--<p class="title"><i class="icon icon-agree fl"></i>推荐话题<a class="fr" href="m/topic/"><i class="icon icon-more"></i></a></p>-->  
+		<div class="swiper-container">
+        <ul class="swiper-wrapper">
+		<?php foreach ($this->content_nav_menu as $key => $val) { ?>
+			<?php if ($val['title']) { ?>
+			<li class="swiper-slide"><a <?php if (($val['type'] == 'category' AND $_GET['category'] AND ($val['type_id'] == $this->category_info['id'])) OR ($val['type'] == 'feature' AND $this->feature_info['id'] == $val['type_id'])) { ?> class="active"<?php } ?> href="<?php echo $val['link']; ?>"<?php if ($val['type'] == 'custom') { ?> target="_blank"<?php } ?>" target="_blank"><?php echo $val['title']; ?></a></li>
+			<?php } ?>
+			<?php } ?>
+        </ul >  
+    </div>
+		<script>
+		var swiper = new Swiper('.tip .swiper-container', {
+			pagination: '.tip .swiper-pagination',
+			slidesPerView: 'auto', 
+			paginationClickable: true,
+			spaceBetween: 10 
+			});
+		</script> 
+	</section>
+	<!--推荐话题end-->
+	<?php } ?>
+
+	<!-- 动态列表 -->
+	<section class="plr10">
+	 <ul class="tplist" id="article_listview"> 
+	</ul>
+	<div class="mod-footer">
+			<a id="load_article" class="aw-load-more"><i class="icon icon-loading icon-spin"></i> <span><?php _e('更多'); ?></span></a>
+		</div>
+	</section>
+
+	<!-- end 动态列表 -->
+<script>feeddi();</script>
+
+<!-- end 内容 -->
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		AWS.load_list_view(G_BASE_URL + '/explore/ajax/list/post_type-article__sort_type-new__feature_id-<?php echo $_GET['feature_id']; ?>__category_id-<?php echo $_GET['category']; ?>', $('#load_article'), $('#article_listview'), 1);
+	});
+</script>
+
+<?php TPL::output('m/footer.tpl.htm'); ?>
